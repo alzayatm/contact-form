@@ -47,14 +47,16 @@
 				      url: "https://l00t7yjgm9.execute-api.us-east-1.amazonaws.com/stage2/contact-us",
 					  contentType: 'application/json',
 					  dataType: 'json',
+					  async: true,
+					  cache: false,
 					  data: JSON.stringify(data),
 
 				      beforeSend: function() { 
 				      	$submit.css('display', 'block').text(waitText);
 				      },
 				      success: function(msg) {
-						console.log(msg["statusCode"]);
-		               if (msg["statusCode"] == "200") {
+						console.log(msg["MessageId"]);
+		               if (msg["MessageId"] != "xyz") {
 						console.log("in the if");
 		               	$('#form-message-warning').hide();
 				            setTimeout(function(){
@@ -73,6 +75,7 @@
 		               	}, 1400);
 
 		               	setTimeout(function(){
+							console.log("Resetting...")
 		               		$( '#contactForm' ).each(function(){
 											    this.reset();
 											});
